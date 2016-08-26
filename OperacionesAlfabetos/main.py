@@ -39,7 +39,7 @@ def crear_alfabeto(menu):
 		elif opcion == '2':
 			opcion_valida=False
 			print ("El alfabeto es español")
-			alfabeto=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z']
+			alfabeto=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','palabra','x','y','z']
 		#Alfabeto númerico
 		elif opcion == '3':
 			opcion_valida=False
@@ -57,18 +57,20 @@ def crear_alfabeto(menu):
 
 #Función para verificar dos palabras con respecto al alfabeto
 def ingresar_palabras(alfabeto):
-	palabra1=""
-	palabra2=""
-	while validar_palabra(alfabeto,palabra1):
-		palabra1=input("Por favor ingrese una palabra:\n")			
-		
+	palabra1,palabra2="",""
+	while validar_palabra(alfabeto, palabra1):
+		palabra1=input("Por favor ingrese una palabra (palabra) :\n")
+	while validar_palabra(alfabeto, palabra2):
+		palabra2=input("Por favor ingrese otra palabra (palabra2) :\n")			
+	print ("Estan son las palabras que ingresaste:\n "+palabra1+" "+palabra2)
+
 #Función que valida si una palabra pertenece al alfabeto o no
 def validar_palabra(alfabeto,palabra):
 	if len(palabra)>0:
 		variable_auxiliar=0
-		for w in range(len(palabra)):
-			for x in range(len(alfabeto)):
-				if alfabeto[x] == palabra[w]:
+		for i in range(len(palabra)):
+			for j in range(len(alfabeto)):
+				if alfabeto[j] == palabra[i]:
 					variable_auxiliar=variable_auxiliar+1
 		if variable_auxiliar==len(palabra):
 			print ("Palabra valida: "+palabra)
@@ -78,7 +80,6 @@ def validar_palabra(alfabeto,palabra):
 			return True
 	else:
 		return True
-
 
 #Iniciamos el programa
 menu_entrada()
