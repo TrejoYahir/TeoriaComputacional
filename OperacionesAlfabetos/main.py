@@ -73,10 +73,10 @@ def validar_palabra(alfabeto,palabra):
 				if alfabeto[j] == palabra[i]:
 					variable_auxiliar=variable_auxiliar+1
 		if variable_auxiliar==len(palabra):
-			print ("Palabra valida: "+palabra)
+			print ("Palabra valida\n")
 			return False
 		else:
-			print ("Palabra invalida")	
+			print ("Palabra invalida\n")	
 			return True
 	else:
 		return True
