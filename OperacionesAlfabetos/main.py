@@ -1,6 +1,6 @@
 #Creamos los menus
 def menu_entrada():
-	mensaje_entrada = "Hola, por favor ingresa el tipo de Alfabeto con el que trabajaré:\n"
+	mensaje_entrada = "Inciso a) de la práctica\nHola, por favor ingresa el tipo de Alfabeto con el que trabajaré:\n"
 	menu = ('1.- Ingresar alfabeto manualmente\n'
 	'2- Alfabeto Espaniol\n'
 	'3.- Números (0...9)\n')
@@ -14,7 +14,6 @@ def crear_alfabeto(menu):
 	while opcion_valida:
 		#Imprimimos el menu y obtenemos la opción
 		opcion = input(menu)
-		print (opcion+'\n')
 		alfabeto = []
 		#Dependiendo la opción es el menu a usar
 		# 1- Alfabeto dinamico ingresado por el usuario
@@ -23,7 +22,10 @@ def crear_alfabeto(menu):
 			seguir = True
 			while seguir:
 				simbolo=input("Ingrese un simbolo\n")
-				alfabeto.append(simbolo)
+				if simbolo != "":
+					alfabeto.append(simbolo)
+				else:
+					print("Caracter no valido\n")
 				if len(alfabeto)>2:
 					seguir_agregando=True
 					while seguir_agregando:	
@@ -59,10 +61,12 @@ def crear_alfabeto(menu):
 def ingresar_palabras(alfabeto):
 	palabra1,palabra2="",""
 	while validar_palabra(alfabeto, palabra1):
-		palabra1=input("Por favor ingrese una palabra (palabra) :\n")
+		palabra1=input("Inciso b) de la práctica\nPor favor ingrese una palabra (w1) :\n")
 	while validar_palabra(alfabeto, palabra2):
-		palabra2=input("Por favor ingrese otra palabra (palabra2) :\n")			
-	print ("Estan son las palabras que ingresaste:\n "+palabra1+" "+palabra2)
+		palabra2=input("Por favor ingrese otra palabra (w2) :\n")			
+	print ("Estan son las palabras que ingresaste:\n"+palabra1+" "+palabra2)
+	#Ejecutamos el inciso c de la práctica
+	concatenacion_a_la_n(palabra1,palabra2)
 
 #Función que valida si una palabra pertenece al alfabeto o no
 def validar_palabra(alfabeto,palabra):
@@ -80,6 +84,62 @@ def validar_palabra(alfabeto,palabra):
 			return True
 	else:
 		return True
+
+def concatenacion_a_la_n(palabra1,palabra2):
+	#Le pedimos al usuario que ingrese el valor de n 
+	print("Inciso c de la práctica\n")
+	#Pedimos al usuario que ingrese el valor hasta que sea un valor valido
+	n=pedir_n()
+	#Concatenamos las palabras
+	concatenacion=concatenar_palabras(palabra1,palabra2)
+	#Aplicamos la potencia a nuestra concatenacion
+	potencia_palabra=potencia(concatenacion,n)
+	print("El resultado de la potencia es:\n"+potencia_palabra+"\n")
+	#Ahora calculamos la longitud de la potencia
+	print ("Inciso d)\n")
+	longitud_palabra(potencia_palabra)
+
+#Funcion que le pide al usuario ingresar una n entera
+def pedir_n():
+	n=""
+	while n_valida(n):
+		n=input("Ingrese un entero al que se elevara la concatenación:\n")
+	#La función input siempre devuelve un string, así que lo convertimos a int
+	n=int(n)
+	return n
+
+#Función que verifica si n es un numero entero valido o no
+def n_valida(n):
+	try:
+		int(n)
+		return False
+	except ValueError:
+		return True
+
+#Funcion que concatena dos palabras
+def concatenar_palabras(palabra1,palabra2):
+	return palabra1+palabra2
+
+#Funcion que imprime la longitud de una palabra
+def longitud_palabra(palabra):
+	
+
+#Funcion que le aplica la n potencia a alguna palabra
+def potencia(palabra,n):
+	potencia=""
+	#Tenemos que evaluar para los 3 distintos caso de n
+	if n==0:
+		return "Cadena vacia"
+	elif n>0:
+		for i in range(n):
+			potencia=potencia+palabra
+	#Por default, debe ser n negativa
+	else:
+		#Hay que voltear la cadena
+		palabra=palabra[::-1]
+		for i in range(abs(n)):
+			potencia=potencia+palabra 
+	return potencia
 
 #Iniciamos el programa
 menu_entrada()
