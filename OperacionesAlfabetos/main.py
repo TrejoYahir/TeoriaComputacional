@@ -72,6 +72,7 @@ def ingresar_palabras(alfabeto):
 def validar_palabra(alfabeto,palabra):
 	if len(palabra)>0:
 		variable_auxiliar=0
+		#Esto funciona bien si el alfabeto son de un solo caracter
 		for i in range(len(palabra)):
 			for j in range(len(alfabeto)):
 				if alfabeto[j] == palabra[i]:
