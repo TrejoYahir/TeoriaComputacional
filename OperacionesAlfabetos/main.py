@@ -23,6 +23,7 @@ def main():
 	#Ejecutamos la potencia de la concatenacion
 	potencia_palabra=potencia(concatenacion,n)
 	print("El resultado de la potencia de la concatenacion es:\n"+potencia_palabra+"\n")
+	#print("La longitud de esta potencia es:\n "+longitud_palabra(alfabeto,potencia_palabra))
 
 
 
@@ -84,35 +85,17 @@ def ingresar_palabra(alfabeto):
 def validar_palabra(alfabeto,palabra):
 	if len(palabra)>0:
 		variable_auxiliar=0
-		discriminador=True
+		print("Son más caracteres\n")
 		for i in alfabeto:
-			if len(i)>1:
-				discriminador=False
-				break
-		if discriminador:
-			#Esto funciona bien si el alfabeto son de un solo caracter
-			for i in range(len(palabra)):
-				if palabra[i] in alfabeto:
-					variable_auxiliar=variable_auxiliar+1
-			if variable_auxiliar==len(palabra):
-				print ("Palabra valida\n")
-				return False
-			else:
-				print ("Palabra invalida\n")
-				return True
-		#Ahora a rifarnos si son más caracteres :/
+			for j in range(len(palabra)):
+				if i==palabra[j:len(i)+j]:
+					variable_auxiliar=variable_auxiliar+len(i)
+		if variable_auxiliar==len(palabra):
+			print ("Palabra valida\n")
+			return False
 		else:
-			print("Son más caracteres\n")
-			for i in alfabeto:
-				for j in range(len(palabra)):
-					if i==palabra[j:len(i)+j]:
-						variable_auxiliar=variable_auxiliar+len(i)
-			if variable_auxiliar==len(palabra):
-				print ("Palabra valida\n")
-				return False
-			else:
-				print ("Palabra invalida\n")
-				return True
+			print ("Palabra invalida\n")
+			return True
 	else:
 		return True
 
@@ -155,7 +138,7 @@ def potencia(palabra,n):
 	return potencia
 
 #Funcion que imprime la longitud de una palabra
-#def longitud_palabra(palabra):
+#def longitud_palabra(alfabeto,palabra):
 
 
 #Iniciamos el programa
