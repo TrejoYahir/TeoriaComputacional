@@ -14,6 +14,7 @@ def crear_alfabeto(menu):
 	while opcion_valida:
 		#Imprimimos el menu y obtenemos la opción
 		opcion = input(menu)
+		#Esto es un Set en python
 		alfabeto = []
 		#Dependiendo la opción es el menu a usar
 		# 1- Alfabeto dinamico ingresado por el usuario
@@ -80,6 +81,10 @@ def validar_palabra(alfabeto,palabra):
 		if variable_auxiliar==len(palabra):
 			print ("Palabra valida\n")
 			return False
+		#else:
+		#	for i in range(len(alfabeto))
+		#		auxiliar=0
+				
 		else:
 			print ("Palabra invalida\n")	
 			return True
@@ -98,7 +103,7 @@ def concatenacion_a_la_n(palabra1,palabra2):
 	print("El resultado de la potencia es:\n"+potencia_palabra+"\n")
 	#Ahora calculamos la longitud de la potencia
 	print ("Inciso d)\n")
-	longitud_palabra(potencia_palabra)
+	#longitud_palabra(potencia_palabra)
 
 #Funcion que le pide al usuario ingresar una n entera
 def pedir_n():
@@ -122,7 +127,7 @@ def concatenar_palabras(palabra1,palabra2):
 	return palabra1+palabra2
 
 #Funcion que imprime la longitud de una palabra
-def longitud_palabra(palabra):
+#def longitud_palabra(palabra):
 	
 
 #Funcion que le aplica la n potencia a alguna palabra
