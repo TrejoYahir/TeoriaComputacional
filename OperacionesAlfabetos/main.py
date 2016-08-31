@@ -23,9 +23,7 @@ def main():
 	#Ejecutamos la potencia de la concatenacion
 	potencia_palabra=potencia(concatenacion,n)
 	print("El resultado de la potencia de la concatenacion es:\n"+potencia_palabra+"\n")
-	#print("La longitud de esta potencia es:\n "+longitud_palabra(alfabeto,potencia_palabra))
-
-
+	print("La longitud de esta potencia es:\n "+longitud_palabra(alfabeto,potencia_palabra)+"\n")
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -62,7 +60,7 @@ def crear_alfabeto(menu):
 		elif opcion == '2':
 			opcion_valida=False
 			print ("El alfabeto es español")
-			alfabeto={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','palabra','x','y','z'}
+			alfabeto={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z'}
 			return alfabeto
 		#Alfabeto númerico
 		elif opcion == '3':
@@ -138,8 +136,8 @@ def potencia(palabra,n):
 	return potencia
 
 #Funcion que imprime la longitud de una palabra
-#def longitud_palabra(alfabeto,palabra):
-
+def longitud_palabra(alfabeto,palabra):
+	#Aqui voy 
 
 #Iniciamos el programa
 main()
