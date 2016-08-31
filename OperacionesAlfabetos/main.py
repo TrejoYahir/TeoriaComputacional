@@ -80,13 +80,19 @@ def validar_palabra(alfabeto,palabra):
 		if variable_auxiliar==len(palabra):
 			print ("Palabra valida\n")
 			return False
-		#else:
-		#	for i in range(len(alfabeto))
-		#		auxiliar=0
-				
+		#Ahora a rifarnos si son más caracteres :/
 		else:
-			print ("Palabra invalida\n")	
-			return True
+			print("Son más caracteres\n")
+			for i in alfabeto:
+				for j in range(len(palabra)):
+					if i==palabra[j:len(i)+j]:
+						variable_auxiliar=variable_auxiliar+len(i)
+			if variable_auxiliar==len(palabra):
+				print ("Palabra valida\n")
+				return False
+			else:
+				print ("Palabra invalida\n")
+				return True
 	else:
 		return True
 
