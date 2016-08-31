@@ -15,7 +15,7 @@ def crear_alfabeto(menu):
 		#Imprimimos el menu y obtenemos la opción
 		opcion = input(menu)
 		#Esto es un Set en python
-		alfabeto = []
+		alfabeto = set()
 		#Dependiendo la opción es el menu a usar
 		# 1- Alfabeto dinamico ingresado por el usuario
 		if opcion == '1':
@@ -24,7 +24,7 @@ def crear_alfabeto(menu):
 			while seguir:
 				simbolo=input("Ingrese un simbolo\n")
 				if simbolo != "":
-					alfabeto.append(simbolo)
+					alfabeto.add(simbolo)
 				else:
 					print("Caracter no valido\n")
 				if len(alfabeto)>2:
@@ -42,12 +42,12 @@ def crear_alfabeto(menu):
 		elif opcion == '2':
 			opcion_valida=False
 			print ("El alfabeto es español")
-			alfabeto=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','palabra','x','y','z']
+			alfabeto={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','palabra','x','y','z'}
 		#Alfabeto númerico
 		elif opcion == '3':
 			opcion_valida=False
 			print ("El alfabeto es númerico")
-			alfabeto=['0','1','2','3','4','5','6','7','8','9']
+			alfabeto={'0','1','2','3','4','5','6','7','8','9'}
 		#Opción invalida se repite el ciclo
 		else:
 			print('Opción no valida, debe ser alguna de las siguientes\n')
@@ -75,9 +75,8 @@ def validar_palabra(alfabeto,palabra):
 		variable_auxiliar=0
 		#Esto funciona bien si el alfabeto son de un solo caracter
 		for i in range(len(palabra)):
-			for j in range(len(alfabeto)):
-				if alfabeto[j] == palabra[i]:
-					variable_auxiliar=variable_auxiliar+1
+			if palabra[i] in alfabeto:
+				variable_auxiliar=variable_auxiliar+1
 		if variable_auxiliar==len(palabra):
 			print ("Palabra valida\n")
 			return False
