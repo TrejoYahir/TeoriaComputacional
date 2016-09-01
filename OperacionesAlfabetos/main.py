@@ -41,6 +41,13 @@ def main():
 	que_es(palabra1,z)
 	print("z es de w2:\n")
 	que_es(palabra2,z)
+	print("\n")
+	#Inciso h y ultimo de la práctica
+	print("Por favor ingrese un valor para realizar la potencia del alfabeto")
+	n=pedir_n()
+	print("El resultado de la potencia del alfabeto es:\n")
+	print("E^",n," = ",potencia_alfabeto(alfabeto,n))
+
 
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
@@ -236,6 +243,27 @@ def es_subfijo_propio(palabra,z):
 def es_subcadena_propia(palabra,z):
 	if z in palabra:
 		return True
+
+#Funcion que calcula la potencia n de un alfabeto
+def potencia_alfabeto(alfabeto,n):
+	#Distintos casos de n
+	n=abs(n)
+	potencia=set()
+	if n==0:
+		potencia.add("Cadena vacia")
+	#n igual a 1
+	elif n==1:
+		potencia=alfabeto
+	#n mayor a 1
+	else:
+		elemento_previo=""
+		for i in range(n):
+			for j in alfabeto:
+				potencia.add(i+i)
+				if elemento_previo!=i:
+					potencia.add(elemento_previo+i)
+				elemento_previo=i
+	return potencia
 
 
 #Iniciamos el programa
