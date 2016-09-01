@@ -23,7 +23,9 @@ def main():
 	#Ejecutamos la potencia de la concatenacion
 	potencia_palabra=potencia(concatenacion,n)
 	print("El resultado de la potencia de la concatenacion es:\n"+potencia_palabra+"\n")
-	print("La longitud de esta potencia es:\n "+longitud_palabra(alfabeto,potencia_palabra)+"\n")
+	print("La longitud de esta potencia es: \n")
+	print(longitud_palabra(alfabeto,potencia_palabra))
+	print("\n")
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -137,7 +139,13 @@ def potencia(palabra,n):
 
 #Funcion que imprime la longitud de una palabra
 def longitud_palabra(alfabeto,palabra):
-	#Aqui voy 
+	variable_auxiliar=0
+	print("Calculando la longitud ...\n")
+	for i in alfabeto:
+		for j in range(len(palabra)):
+			if i==palabra[j:len(i)+j]:
+				variable_auxiliar=variable_auxiliar+1
+	return variable_auxiliar 
 
 #Iniciamos el programa
 main()
