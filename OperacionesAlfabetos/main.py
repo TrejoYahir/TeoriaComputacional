@@ -41,12 +41,13 @@ def main():
 	que_es(palabra1,z)
 	print("z es de w2:\n")
 	que_es(palabra2,z)
-	print("\n")
 	#Inciso h y ultimo de la práctica
 	print("Por favor ingrese un valor para realizar la potencia del alfabeto")
 	n=pedir_n()
 	print("El resultado de la potencia del alfabeto es:\n")
-	print("E^",n," = ",potencia_alfabeto(alfabeto,n))
+	aux=set()
+	print("E^",n," =\n")
+	potencia_alfabeto(alfabeto,aux,n)
 
 
 
@@ -128,7 +129,7 @@ def validar_palabra(alfabeto,palabra):
 def pedir_n():
 	n=""
 	while n_valida(n):
-		n=input("Ingrese un entero al que se elevara la palabra\n")
+		n=input("Ingrese un entero al que se elevara\n")
 	#La función input siempre devuelve un string, así que lo convertimos a int
 	return int(n)
 
@@ -205,7 +206,7 @@ def validar_caracter(alfabeto,caracter):
 def buscar_elemento(palabra,caracter):
 	contador=0
 	for i in range(len(palabra)):
-		if caracter == palabra[i:len(caracter)]:
+		if caracter == palabra[i:len(caracter)+i]:
 			contador+=1
 	print("En w1="+palabra+"\n")
 	print("Encontre este elemento: "+caracter+"\n")
@@ -245,26 +246,30 @@ def es_subcadena_propia(palabra,z):
 		return True
 
 #Funcion que calcula la potencia n de un alfabeto
-def potencia_alfabeto(alfabeto,n):
+def potencia_alfabeto(alfabeto,aux,n):
 	#Distintos casos de n
 	n=abs(n)
 	potencia=set()
+	lista_alfabeto=list(alfabeto)
 	if n==0:
 		potencia.add("Cadena vacia")
-	#n igual a 1
-	elif n==1:
-		potencia=alfabeto
-	#n mayor a 1
+		print (potencia)
+	#n mayor o igual 1
 	else:
-		elemento_previo=""
-		for i in range(n):
-			for j in alfabeto:
-				potencia.add(i+i)
-				if elemento_previo!=i:
-					potencia.add(elemento_previo+i)
-				elemento_previo=i
-	return potencia
-
+		auxiliar=list(aux)
+		if len(auxiliar) == 0:
+			auxiliar=list(alfabeto)
+			aux=alfabeto
+		if len(auxiliar) == (len(lista_alfabeto)**n):
+			print("Numero de elementos:\n")
+			print(len(auxiliar))
+			print("\nElementos:\n")
+			print(aux)
+		else:
+			for i in range(len(auxiliar)):
+				for j in range(len(lista_alfabeto)):
+					potencia.add(auxiliar[i]+lista_alfabeto[j])
+			potencia_alfabeto(alfabeto,potencia,n)
 
 #Iniciamos el programa
 main()
