@@ -30,6 +30,18 @@ def main():
 	#Solicitamos al usuario el caracter a buscar
 	x=ingresar_caracter(alfabeto)
 	buscar_elemento(palabra1,x)
+	#Inciso f de la práctica
+	n=pedir_n()
+	print("Con la palabra w1="+palabra1+" elevado a la: ",n,"\n")
+	print("Obtenemos como resultado: "+potencia(palabra1,n))
+	#Inciso g de la práctica
+	print("Por favor ingrese z para decirle si es un subfijo o prefijo")
+	z=ingresar_palabra(alfabeto)
+	print("z es de w1:\n")
+	que_es(palabra1,z)
+	print("z es de w2:\n")
+	que_es(palabra2,z)
+
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -109,10 +121,9 @@ def validar_palabra(alfabeto,palabra):
 def pedir_n():
 	n=""
 	while n_valida(n):
-		n=input("Ingrese un entero al que se elevara la concatenación:\n")
+		n=input("Ingrese un entero al que se elevara la palabra\n")
 	#La función input siempre devuelve un string, así que lo convertimos a int
-	n=int(n)
-	return n
+	return int(n)
 
 #Funcion que concatena dos palabras
 def concatenar_palabras(palabra1,palabra2):
@@ -147,6 +158,8 @@ def potencia(palabra,n):
 def longitud_palabra(alfabeto,palabra):
 	variable_auxiliar=0
 	print("Calculando la longitud ...\n")
+	if palabra == "Cadena vacia":
+		return variable_auxiliar
 	for i in alfabeto:
 		for j in range(len(palabra)):
 			if i==palabra[j:len(i)+j]:
@@ -157,7 +170,7 @@ def longitud_palabra(alfabeto,palabra):
 def ingresar_caracter(alfabeto):
 	caracter=""
 	while validar_caracter(alfabeto, caracter):
-		caracter=input("Por favor ingrese el caracter a buscar en w1 :\n")
+		caracter=input("Por favor ingrese un caracter el cual buscare en w1:\n")
 	return caracter
 
 #Función que valida si una palabra pertenece al alfabeto o no
@@ -190,6 +203,39 @@ def buscar_elemento(palabra,caracter):
 	print("En w1="+palabra+"\n")
 	print("Encontre este elemento: "+caracter+"\n")
 	print("Número de veces: ",contador,"\n")
+
+#Funcion que nos dira que es una cadena z con respecto a 
+def que_es(palabra,z):
+	if palabra==z:
+		print ("Es un subfijo, prefijo y subcadena\n")
+	else:
+		if es_prefijo_propio(palabra,z):
+			print ("Es un prefijo propio\n")
+		if es_subfijo_propio(palabra,z):
+			print ("Es un subfijo propio\n")
+		if es_subcadena_propia(palabra,z):
+			print ("Es una subcadena propia\n")
+		else:
+			print("z: "+z+" no es nada de la palabra: "+palabra)
+
+#Funcion que verifica dos cadenas y dice si es un prefijo propio o no
+def es_prefijo_propio(palabra,z):
+	for i in range(len(palabra)):
+		if z==palabra[0:i]:
+				return True
+	return False
+
+#Funcion que verifica si es subfijo propio
+def es_subfijo_propio(palabra,z):
+	for i in range(len(palabra)):
+		if z==palabra[len(palabra)-i:len(palabra)]:
+				return True
+	return False
+
+#Funcion que determina si es una subcadena propia
+def es_subcadena_propia(palabra,z):
+	if z in palabra:
+		return True
 
 
 #Iniciamos el programa
