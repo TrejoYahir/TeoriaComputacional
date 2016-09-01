@@ -49,8 +49,6 @@ def main():
 	print("E^",n," =\n")
 	potencia_alfabeto(alfabeto,aux,n)
 
-
-
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
 	opcion_valida=True
