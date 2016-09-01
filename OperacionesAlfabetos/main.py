@@ -26,6 +26,10 @@ def main():
 	print("La longitud de esta potencia es: \n")
 	print(longitud_palabra(alfabeto,potencia_palabra))
 	print("\n")
+	#Inciso e de la práctica
+	#Solicitamos al usuario el caracter a buscar
+	x=ingresar_caracter(alfabeto)
+	buscar_elemento(palabra1,x)
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -42,7 +46,7 @@ def crear_alfabeto(menu):
 			seguir = True
 			while seguir:
 				simbolo=input("Ingrese un simbolo\n")
-				if simbolo != "":
+				if simbolo != "" and (" " in simbolo)==False:
 					alfabeto.add(simbolo)
 				else:
 					print("Caracter no valido\n")
@@ -84,8 +88,10 @@ def ingresar_palabra(alfabeto):
 #Función que valida si una palabra pertenece al alfabeto o no
 def validar_palabra(alfabeto,palabra):
 	if len(palabra)>0:
+		if " " in palabra:
+			print("No se permiten espacios entre los simbolos")
+			return True
 		variable_auxiliar=0
-		print("Son más caracteres\n")
 		for i in alfabeto:
 			for j in range(len(palabra)):
 				if i==palabra[j:len(i)+j]:
@@ -145,7 +151,46 @@ def longitud_palabra(alfabeto,palabra):
 		for j in range(len(palabra)):
 			if i==palabra[j:len(i)+j]:
 				variable_auxiliar=variable_auxiliar+1
-	return variable_auxiliar 
+	return variable_auxiliar
+
+#Función para verificar dos palabras con respecto al alfabeto
+def ingresar_caracter(alfabeto):
+	caracter=""
+	while validar_caracter(alfabeto, caracter):
+		caracter=input("Por favor ingrese el caracter a buscar en w1 :\n")
+	return caracter
+
+#Función que valida si una palabra pertenece al alfabeto o no
+def validar_caracter(alfabeto,caracter):
+	if len(caracter)>0:
+		variable_auxiliar=0
+		print("Estoy validando el caracter ...\n")
+		if " " in caracter:
+			print("No se permiten espacios entre los simbolos")
+			return True
+		for i in alfabeto:
+			for j in range(len(caracter)):
+				if i == caracter[j:len(i)+j]:
+					variable_auxiliar=variable_auxiliar+len(i)
+		if variable_auxiliar == len(caracter):
+			print ("Caracter valido\n")
+			return False
+		else:
+			print ("Caracter invalido\n")
+			return True
+	else:
+		return True
+
+#Funcion que busca un elemento del alfabeto dentro de una palabra
+def buscar_elemento(palabra,caracter):
+	contador=0
+	for i in range(len(palabra)):
+		if caracter == palabra[i:len(caracter)]:
+			contador+=1
+	print("En w1="+palabra+"\n")
+	print("Encontre este elemento: "+caracter+"\n")
+	print("Número de veces: ",contador,"\n")
+
 
 #Iniciamos el programa
 main()
