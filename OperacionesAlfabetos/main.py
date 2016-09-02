@@ -48,6 +48,8 @@ def main():
 	aux=set()
 	print("E^",n," =\n")
 	potencia_alfabeto(alfabeto,aux,n)
+	es_palindromo(palabra1)
+	es_palindromo(palabra2)
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -268,6 +270,11 @@ def potencia_alfabeto(alfabeto,aux,n):
 				for j in range(len(lista_alfabeto)):
 					potencia.add(auxiliar[i]+lista_alfabeto[j])
 			potencia_alfabeto(alfabeto,potencia,n)
+
+#Funcion que verifica si una palabra es un palindromo
+def es_palindromo(palabra):
+	if palabra == palabra[::-1]:
+		print ("\n"+palabra+" es un palindromo\n")
 
 #Iniciamos el programa
 main()
