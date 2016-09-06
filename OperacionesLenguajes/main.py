@@ -12,6 +12,12 @@ def main():
 	print ("El alfabeto con el que trabajare es:\n")
 	print (alfabeto)
 	print("\n")
+	#Ahora el programa automaticamente creará los lenguajes con los que se trabajará
+	lenguage1=crear_lenguaje(alfabeto)
+	lenguage2=crear_lenguaje(alfabeto)
+	#Imprimimos los lenguajes
+	print ("Los lenguajes con los que trabajare son:\n")
+	print("Lenguaje")
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -59,6 +65,11 @@ def crear_alfabeto(menu):
 		#Opción invalida se repite el ciclo
 		else:
 			print('Opcion no valida, debe ser alguna de las siguientes\n')
+
+#Funcion que crea un lenguaje a partir de un alfabeto
+def crear_lenguaje(alfabeto):
+	lenguaje=set()
+	return lenguaje
 
 #Ejecutamos el programa
 main()
