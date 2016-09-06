@@ -133,10 +133,6 @@ def pedir_n():
 	#La función input siempre devuelve un string, así que lo convertimos a int
 	return int(n)
 
-#Funcion que concatena dos palabras
-def concatenar_palabras(palabra1,palabra2):
-	return palabra1+palabra2
-
 #Función que verifica si n es un numero entero valido o no
 def n_valida(n):
 	try:
@@ -144,6 +140,10 @@ def n_valida(n):
 		return False
 	except ValueError:
 		return True
+
+#Funcion que concatena dos palabras
+def concatenar_palabras(palabra1,palabra2):
+	return palabra1+palabra2
 
 #Funcion que le aplica la n potencia a alguna palabra
 def potencia(palabra,n):
