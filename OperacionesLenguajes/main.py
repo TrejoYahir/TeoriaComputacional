@@ -1,4 +1,7 @@
+#Importamos las librerias a usar
+import random
 #Función principal
+potencia=set()
 def main():
 	mensaje_entrada = "Inciso a) de la práctica\nHola, por favor ingresa el tipo de Alfabeto con el que trabajare:\n"
 	menu = ('1.- Ingresar alfabeto manualmente\n'
@@ -13,11 +16,14 @@ def main():
 	print (alfabeto)
 	print("\n")
 	#Ahora el programa automaticamente creará los lenguajes con los que se trabajará
-	lenguage1=crear_lenguaje(alfabeto)
-	lenguage2=crear_lenguaje(alfabeto)
+	print("Lenguaje 1:\n")
+	lenguaje1=crear_lenguaje(alfabeto)
+	print("Lenguaje 2:\n")
+	lenguaje2=crear_lenguaje(alfabeto)
 	#Imprimimos los lenguajes
 	print ("Los lenguajes con los que trabajare son:\n")
-	print("Lenguaje")
+	print("Lenguaje 1:\n ",lenguaje1)
+	print("\nLenguaje 2:\n ",lenguaje2)
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -68,8 +74,69 @@ def crear_alfabeto(menu):
 
 #Funcion que crea un lenguaje a partir de un alfabeto
 def crear_lenguaje(alfabeto):
+	#Solicitamos el numero de elementos y la longitud de los mismos para el alfabeto
+	print("Por favor ingrese la cantidad de palabras que contendra el alfabeto:\n")
+	numero_elementos=pedir_n()
+	print("Ahora, por favor ingrese la longitud de las palabras que compondran el alfabeto:\n")
+	longitud=pedir_n()
+	#Definimos a nuestro lenguaje
 	lenguaje=set()
+	aux=set()
+	potencia_alfabeto(alfabeto,aux,longitud)
+	lista_palabras=list(potencia)
+	print("\n",lista_palabras,"\n")
+	continuar=True
+	while continuar:
+		lista_lenguaje=list(lenguaje)
+		if numero_elementos == len(lista_lenguaje):
+			continuar=False
+		else:
+			lenguaje.add(lista_palabras[random.randint(0,len(lista_palabras))])
 	return lenguaje
+
+
+#Funcion que le pide al usuario ingresar una n entera
+def pedir_n():
+	n=""
+	while n_valida(n):
+		n=input("Por favor ingrese un entero:\n")
+	#La función input siempre devuelve un string, así que lo convertimos a int
+	return int(n)
+
+#Función que verifica si n es un numero entero valido o no
+def n_valida(n):
+	try:
+		int(n)
+		return False
+	except ValueError:
+		return True
+
+#Funcion que calcula la potencia n de un alfabeto
+def potencia_alfabeto(alfabeto,aux,n):
+	#Distintos casos de n
+	n=abs(n)
+	#potencia=set()
+	lista_alfabeto=list(alfabeto)
+	if n==0:
+		potencia.add("Cadena vacia")
+		print (potencia)
+	#n mayor o igual 1
+	else:
+		auxiliar=list(aux)
+		if len(auxiliar) == 0:
+			auxiliar=list(alfabeto)
+			aux=alfabeto
+		if len(auxiliar) == (len(lista_alfabeto)**n):
+			pass
+			#print("Numero de elementos:\n")
+			#print(len(auxiliar))
+			#print("\nElementos:\n")
+			#print(aux)
+		else:
+			for i in range(len(auxiliar)):
+				for j in range(len(lista_alfabeto)):
+					potencia.add(auxiliar[i]+lista_alfabeto[j])
+			potencia_alfabeto(alfabeto,potencia,n)
 
 #Ejecutamos el programa
 main()
