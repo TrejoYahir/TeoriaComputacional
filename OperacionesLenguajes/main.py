@@ -1,7 +1,6 @@
 #Importamos las librerias a usar
 import random
 #Función principal
-potencia=set()
 def main():
 	mensaje_entrada = "Inciso a) de la práctica\nHola, por favor ingresa el tipo de Alfabeto con el que trabajare:\n"
 	menu = ('1.- Ingresar alfabeto manualmente\n'
@@ -22,8 +21,12 @@ def main():
 	lenguaje2=crear_lenguaje(alfabeto)
 	#Imprimimos los lenguajes
 	print ("Los lenguajes con los que trabajare son:\n")
-	print("Lenguaje 1:\n ",lenguaje1)
-	print("\nLenguaje 2:\n ",lenguaje2)
+	print("Lenguaje 1:\nL1 = ",lenguaje1)
+	print("\nLenguaje 2:\nL2 = ",lenguaje2)
+	print("\nLa union de ambos lenguajes es:\nLu=",union_lenguajes(lenguaje1,lenguaje2))
+	print("\nLa concatenacion de los lenguajes es:\nLc =",concatenacion_lenguajes(lenguaje1,lenguaje2))
+	print("\nLa diferencia de el lenguaje L1-L2 es:\nL1-L2 =", diferencia_lenguajes(lenguaje1,lenguaje2))
+	print("\nLa diferencia de el lenguaje L2-L1 es:\nL2-L1 =", diferencia_lenguajes(lenguaje2,lenguaje1))
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -82,8 +85,9 @@ def crear_lenguaje(alfabeto):
 	#Definimos a nuestro lenguaje
 	lenguaje=set()
 	aux=set()
-	potencia_alfabeto(alfabeto,aux,longitud)
-	lista_palabras=list(potencia)
+	palabras=potencia_alfabeto(alfabeto,aux,longitud)
+	#potencia_alfabeto(alfabeto,aux,longitud)
+	lista_palabras=list(palabras)
 	print("\n",lista_palabras,"\n")
 	continuar=True
 	while continuar:
@@ -93,7 +97,6 @@ def crear_lenguaje(alfabeto):
 		else:
 			lenguaje.add(lista_palabras[random.randint(0,len(lista_palabras))])
 	return lenguaje
-
 
 #Funcion que le pide al usuario ingresar una n entera
 def pedir_n():
@@ -115,11 +118,12 @@ def n_valida(n):
 def potencia_alfabeto(alfabeto,aux,n):
 	#Distintos casos de n
 	n=abs(n)
-	#potencia=set()
+	potencia=set()
 	lista_alfabeto=list(alfabeto)
 	if n==0:
 		potencia.add("Cadena vacia")
 		print (potencia)
+		return potencia
 	#n mayor o igual 1
 	else:
 		auxiliar=list(aux)
@@ -127,16 +131,34 @@ def potencia_alfabeto(alfabeto,aux,n):
 			auxiliar=list(alfabeto)
 			aux=alfabeto
 		if len(auxiliar) == (len(lista_alfabeto)**n):
-			pass
-			#print("Numero de elementos:\n")
-			#print(len(auxiliar))
-			#print("\nElementos:\n")
-			#print(aux)
+			print("Numero de elementos:\n")
+			print(len(auxiliar))
+			print("\nElementos:\n")
+			print(aux)
+			return aux
 		else:
 			for i in range(len(auxiliar)):
 				for j in range(len(lista_alfabeto)):
 					potencia.add(auxiliar[i]+lista_alfabeto[j])
-			potencia_alfabeto(alfabeto,potencia,n)
+			return potencia_alfabeto(alfabeto,potencia,n)
+
+#Funcion que une dos lenguajes
+def union_lenguajes(lenguaje1,lenguaje2):
+	return lenguaje1|lenguaje2
+
+#Funcion que concatena dos lenguajes
+def concatenacion_lenguajes(lenguaje1,lenguaje2):
+	concatenacion=set()
+	for i in lenguaje1:
+		for j in lenguaje2:
+			concatenacion.add(i+j)
+	return concatenacion
+
+#Funcion que hace la diferencia (resta) entre dos lenguajes
+def diferencia_lenguajes(lenguaje1,lenguaje2):
+	return lenguaje1-lenguaje2
+
+
 
 #Ejecutamos el programa
 main()
