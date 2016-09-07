@@ -8,12 +8,14 @@ def main():
 	'3.- Numeros (0...9)\n')
 	#Imprimimos el menu
 	print (mensaje_entrada)
+	#Inciso a)
 	#Creamos el alfabeto
 	alfabeto=crear_alfabeto(menu)
 	#Al final imprimimos el alfabeto
 	print ("El alfabeto con el que trabajare es:\n")
 	print (alfabeto)
 	print("\n")
+	#Inciso b)
 	#Ahora el programa automaticamente creará los lenguajes con los que se trabajará
 	print("Lenguaje 1:\n")
 	lenguaje1=crear_lenguaje(alfabeto)
@@ -23,10 +25,19 @@ def main():
 	print ("Los lenguajes con los que trabajare son:\n")
 	print("Lenguaje 1:\nL1 = ",lenguaje1)
 	print("\nLenguaje 2:\nL2 = ",lenguaje2)
+	#Inciso c)
+	#Imprimimos la union de los lenguajes
 	print("\nLa union de ambos lenguajes es:\nLu=",union_lenguajes(lenguaje1,lenguaje2))
+	#Inciso d)
+	#Imprimimos la concatenacion de los lenguajes
 	print("\nLa concatenacion de los lenguajes es:\nLc =",concatenacion_lenguajes(lenguaje1,lenguaje2))
+	#Inciso e)
+	#Imprimimos la diferencia entre ambos lenguajes
 	print("\nLa diferencia de el lenguaje L1-L2 es:\nL1-L2 =", diferencia_lenguajes(lenguaje1,lenguaje2))
 	print("\nLa diferencia de el lenguaje L2-L1 es:\nL2-L1 =", diferencia_lenguajes(lenguaje2,lenguaje1))
+	#Inciso f)
+	#Potencia de un lenguaje
+	potencia_lenguaje_opcion(lenguaje1,lenguaje2)
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -79,9 +90,9 @@ def crear_alfabeto(menu):
 def crear_lenguaje(alfabeto):
 	#Solicitamos el numero de elementos y la longitud de los mismos para el alfabeto
 	print("Por favor ingrese la cantidad de palabras que contendra el alfabeto:\n")
-	numero_elementos=pedir_n()
+	numero_elementos=pedir_n(1)
 	print("Ahora, por favor ingrese la longitud de las palabras que compondran el alfabeto:\n")
-	longitud=pedir_n()
+	longitud=pedir_n(1)
 	#Definimos a nuestro lenguaje
 	lenguaje=set()
 	aux=set()
@@ -95,21 +106,33 @@ def crear_lenguaje(alfabeto):
 		if numero_elementos == len(lista_lenguaje):
 			continuar=False
 		else:
-			lenguaje.add(lista_palabras[random.randint(0,len(lista_palabras))])
+			aleatorio=random.randint(0,len(lista_palabras))
+			if aleatorio >= len(lista_palabras):
+				lenguaje.add(lista_palabras[aleatorio-1])
+			else:
+				print(aleatorio)
+				lenguaje.add(lista_palabras[aleatorio])
 	return lenguaje
 
 #Funcion que le pide al usuario ingresar una n entera
-def pedir_n():
+def pedir_n(opcion):
 	n=""
-	while n_valida(n):
-		n=input("Por favor ingrese un entero:\n")
+	if opcion == 1:
+		while n_valida(n,1):
+			n=input("Por favor ingrese un entero:\n")
+	else:
+		while n_valida(n,0):
+			n=input("Por favor ingrese un entero:\n")
 	#La función input siempre devuelve un string, así que lo convertimos a int
 	return int(n)
 
 #Función que verifica si n es un numero entero valido o no
-def n_valida(n):
+def n_valida(n,opcion):
 	try:
 		int(n)
+		if (int(n) in range(-6,6)) == False:
+			print ("\nn fuera de rango\n")
+			return True
 		return False
 	except ValueError:
 		return True
@@ -157,6 +180,56 @@ def concatenacion_lenguajes(lenguaje1,lenguaje2):
 #Funcion que hace la diferencia (resta) entre dos lenguajes
 def diferencia_lenguajes(lenguaje1,lenguaje2):
 	return lenguaje1-lenguaje2
+
+#Funcion que le permite al usuario escoger el lenguaje y la potencia(la n) para realizar la potencia del mismo
+def potencia_lenguaje_opcion(lenguaje1,lenguaje2):
+	#Le pedimos al usuario que seleccione un lenguaje
+	opcion_valida=True
+	while opcion_valida:
+		print("\nPor favor, ahora seleccione un alfabeto al cual le aplicare la potencia\n")
+		opcion=input("1 -> Lenguaje1\n2 -> Lenguaje2\n")
+		if opcion == "1":
+			opcion_valida=False
+			print("\nPor favor ingrese el numero al cual se aplicara la potencia para el alfabeto [-5,5]\n")
+			n=pedir_n(0)
+			potencia_lenguaje(lenguaje1,n)
+		elif opcion == "2":
+			opcion_valida=False
+			print("\nPor favor ingrese el numero al cual se aplicara la potencia para el alfabeto [-5,5]\n")
+			n=pedir_n(0)
+			potencia_lenguaje(lenguaje2,n)
+		else:
+			print("Opcion no valida, debe ser 1 o 2")
+
+#Potencia de un lenguaje
+def potencia_lenguaje(lenguaje,n):
+	potencia=set()
+	#n=0
+	if n == 0:
+		potencia.add("Cadena Vacia")
+		print("\nLp = ",potencia,"\n")
+	#n>0
+	elif n>0:
+		lista_potencia=list(potencia)
+		if len(lista_potencia) == 0:
+			potencia=lenguaje
+		for i in range(n-1):
+			potencia= concatenacion_lenguajes(potencia,lenguaje)
+		print("\nLp = ",potencia)
+	#n<0
+	else:
+		auxiliar=set()
+		for i in lenguaje:
+			auxiliar.add(i[::-1])
+		n=abs(n)
+		lista_potencia=list(potencia)
+		if len(lista_potencia) == 0:
+			potencia=auxiliar
+		for i in range(n-1):
+			potencia= concatenacion_lenguajes(potencia,auxiliar)
+		print("\nLp = ",potencia)
+
+#Funcion que crea un curp
 
 
 
