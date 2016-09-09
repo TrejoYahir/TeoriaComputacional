@@ -12,18 +12,18 @@ def main():
 	#Creamos el alfabeto
 	alfabeto=crear_alfabeto(menu)
 	#Al final imprimimos el alfabeto
-	print ("El alfabeto con el que trabajare es:\n")
+	print ("\nEl alfabeto con el que trabajare es:\n")
 	print (alfabeto)
 	print("\n")
 	#Inciso b)
 	#Ahora el programa automaticamente creará los lenguajes con los que se trabajará
-	print("Lenguaje 1:\n")
+	print("\nLenguaje 1:\n")
 	lenguaje1=crear_lenguaje(alfabeto)
-	print("Lenguaje 2:\n")
+	print("\nLenguaje 2:\n")
 	lenguaje2=crear_lenguaje(alfabeto)
 	#Imprimimos los lenguajes
-	print ("Los lenguajes con los que trabajare son:\n")
-	print("Lenguaje 1:\nL1 = ",lenguaje1)
+	print ("\nLos lenguajes con los que trabajare son:\n")
+	print("\nLenguaje 1:\nL1 = ",lenguaje1)
 	print("\nLenguaje 2:\nL2 = ",lenguaje2)
 	#Inciso c)
 	#Imprimimos la union de los lenguajes
@@ -38,6 +38,9 @@ def main():
 	#Inciso f)
 	#Potencia de un lenguaje
 	potencia_lenguaje_opcion(lenguaje1,lenguaje2)
+	#Inciso g)
+	#Curp
+	print("\nCurp: "+crear_curp()+"\n")
 
 #Función que crea el alfabeto dependiendo de la opción del usuario
 def crear_alfabeto(menu):
@@ -89,9 +92,9 @@ def crear_alfabeto(menu):
 #Funcion que crea un lenguaje a partir de un alfabeto
 def crear_lenguaje(alfabeto):
 	#Solicitamos el numero de elementos y la longitud de los mismos para el alfabeto
-	print("Por favor ingrese la cantidad de palabras que contendra el alfabeto:\n")
+	print("\nPor favor ingrese la cantidad de palabras que contendra el alfabeto:\n")
 	numero_elementos=pedir_n(1)
-	print("Ahora, por favor ingrese la longitud de las palabras que compondran el alfabeto:\n")
+	print("\nAhora, por favor ingrese la longitud de las palabras que compondran el alfabeto:\n")
 	longitud=pedir_n(1)
 	#Definimos a nuestro lenguaje
 	lenguaje=set()
@@ -99,7 +102,6 @@ def crear_lenguaje(alfabeto):
 	palabras=potencia_alfabeto(alfabeto,aux,longitud)
 	#potencia_alfabeto(alfabeto,aux,longitud)
 	lista_palabras=list(palabras)
-	print("\n",lista_palabras,"\n")
 	continuar=True
 	while continuar:
 		lista_lenguaje=list(lenguaje)
@@ -110,7 +112,7 @@ def crear_lenguaje(alfabeto):
 			if aleatorio >= len(lista_palabras):
 				lenguaje.add(lista_palabras[aleatorio-1])
 			else:
-				print(aleatorio)
+				#print(aleatorio)
 				lenguaje.add(lista_palabras[aleatorio])
 	return lenguaje
 
@@ -130,9 +132,13 @@ def pedir_n(opcion):
 def n_valida(n,opcion):
 	try:
 		int(n)
-		if (int(n) in range(-6,6)) == False:
+		if (int(n) in range(-6,6)) == False and opcion==0:
 			print ("\nn fuera de rango\n")
 			return True
+		elif opcion==1:
+			if int(n)<0:
+				print("\nDebe ser un numero positivo :/")
+				return True
 		return False
 	except ValueError:
 		return True
@@ -154,10 +160,10 @@ def potencia_alfabeto(alfabeto,aux,n):
 			auxiliar=list(alfabeto)
 			aux=alfabeto
 		if len(auxiliar) == (len(lista_alfabeto)**n):
-			print("Numero de elementos:\n")
+			print("\nNumero de palabras:\n")
 			print(len(auxiliar))
-			print("\nElementos:\n")
-			print(aux)
+			print("\nPosibles palabras:\n")
+			print(aux,"\n")
 			return aux
 		else:
 			for i in range(len(auxiliar)):
@@ -231,9 +237,96 @@ def potencia_lenguaje(lenguaje,n):
 
 #Funcion que crea un curp
 def crear_curp():
-	alfabeto_letras={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'}
-	alfabeto_numero={'0','1','2','3','4','5','6','7','8','9'}
-	lenguaje_entidades=set()
+	#Definimos los alfabetos con que trabajaremos
+	alfabeto_letras=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+	alfabeto_letras_consonantes=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z']
+	alfabeto_vocales=['A','E','I','O','U']
+	alfabeto_numeros=['0','1','2','3','4','5','6','7','8','9']
+	alfabeto_entidades=['AS','BC','BS','CC','CS','CH','CL','CM','DF','DG','GT','GR','HG','JC','MC','MN','MS','NT','NL','OC','PL','QT','QR','SP','SL','SR','TC','TS','TL','VZ','YN','ZS']
+	cuatro_primeros=primeros_cuatro(alfabeto_letras,alfabeto_vocales)
+	digitos=primeros_digitos(alfabeto_numeros)
+	sexo=hombre_mujer()
+	entidad=crear_entidad(alfabeto_entidades)
+	tres_ultimos=ultimos_tres(alfabeto_letras_consonantes)
+	homoclave=crear_homoclave(alfabeto_numeros)
+	return cuatro_primeros+digitos+sexo+entidad+tres_ultimos+homoclave
+
+#Funcion que crea los cuatro primeros caracteres del curp
+def primeros_cuatro(alfabeto_letras,alfabeto_vocales):
+	resultado=''
+	#Obtenemos la primer letra
+	aleatorio=random.randint(0,len(alfabeto_letras)-1)
+	resultado+=alfabeto_letras[aleatorio]
+	#Obtenemos la segunda letra que debe ser una vocal
+	aleatorio=random.randint(0,len(alfabeto_vocales)-1)
+	resultado+=alfabeto_vocales[aleatorio]
+	#Obtenemos las ultimas dos letras
+	aleatorio=random.randint(0,len(alfabeto_letras)-1)
+	resultado+=alfabeto_letras[aleatorio]
+	aleatorio=random.randint(0,len(alfabeto_letras)-1)
+	resultado+=alfabeto_letras[aleatorio]
+	return resultado
+
+#Funcion que devulve los seis digitos del curp
+def primeros_digitos(alfabeto_numeros):
+	resultado=''
+	#Primeros dos digitos
+	aleatorio=random.randint(0,len(alfabeto_numeros)-1)
+	resultado+=alfabeto_numeros[aleatorio]
+	aleatorio=random.randint(0,len(alfabeto_numeros)-1)
+	resultado+=alfabeto_numeros[aleatorio]
+	#Segundo par de digitos, es mes, asi que maximo hasta doce
+	aleatorio=random.randint(1,12)
+	if aleatorio<10:
+		resultado+="0"+str(aleatorio)
+	else:
+		resultado+=str(aleatorio)
+	#Tercer par de numeros, hasta 31
+	aleatorio=random.randint(1,31)
+	if aleatorio<10:
+		resultado+="0"+str(aleatorio)
+	else:
+		resultado+=str(aleatorio)
+	return resultado
+
+#Funcion que dice si es hombre o mujer
+def hombre_mujer():
+	return random.choice('HM')
+
+#Funcion que devuelve la entidad a la que pertenece
+def crear_entidad(alfabeto_entidades):
+	resultado=''
+	aleatorio=random.randint(0,len(alfabeto_entidades)-1)
+	resultado+=alfabeto_entidades[aleatorio]
+	return resultado
+
+#Funcion que devulve los otros tres caracteres
+def ultimos_tres(alfabeto_letras_consonantes):
+	resultado=''
+	#1
+	aleatorio=random.randint(0,len(alfabeto_letras_consonantes)-1)
+	resultado+=alfabeto_letras_consonantes[aleatorio]
+	#2
+	aleatorio=random.randint(0,len(alfabeto_letras_consonantes)-1)
+	resultado+=alfabeto_letras_consonantes[aleatorio]
+	#3
+	aleatorio=random.randint(0,len(alfabeto_letras_consonantes)-1)
+	resultado+=alfabeto_letras_consonantes[aleatorio]
+	return resultado
+
+#Funcion que crea una homoclave
+def crear_homoclave(alfabeto_numeros):
+	resultado=''
+	aleatorio=random.randint(0,len(alfabeto_numeros)-1)
+	resultado+=str(aleatorio)
+	aleatorio=random.randint(0,len(alfabeto_numeros)-1)
+	resultado+=str(aleatorio)
+	return resultado
+
+
+
+
+
 
 
 #Ejecutamos el programa
