@@ -323,11 +323,5 @@ def crear_homoclave(alfabeto_numeros):
 	resultado+=str(aleatorio)
 	return resultado
 
-
-
-
-
-
-
 #Ejecutamos el programa
 main()
