@@ -44,7 +44,7 @@ class Automata():
 	def estado_q1(self,q):
 		if q in self.e2:
 			return "c0"
-		elif q==0:
+		elif q=="0":
 			return "c2"
 		else:
 			return "m"
