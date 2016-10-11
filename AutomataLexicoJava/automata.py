@@ -5,6 +5,7 @@ class Automata():
 	e3=("0","1","2","3","4","5","6","7")
 	e4=("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f")
 	signos=("+","-")
+	otros_signos=("+","-","*","/",",",";")
 	estado="q0"
 	def calcular_estado(self, q):
 		if self.estado=="q0":
@@ -78,10 +79,14 @@ class Automata():
 	def estado_c1(self,q):
 		if q in self.e4:
 			return "c1"
+		elif q in self.otros_signos:
+			return "c1"
 		else:
 			return "m"
 	def estado_c2(self,q):
 		if q in self.e3:
+			return "c2"
+		elif q in self.otros_signos:
 			return "c2"
 		elif q=="x":
 			return "q6"
@@ -90,10 +95,14 @@ class Automata():
 	def estado_c3(self,q):
 		if q in self.e2:
 			return "c3"
+		elif q in self.otros_signos:
+			return "c3"
 		elif q=="e":
 			return "q3"
 		else:
 			return "m"
 	def estado_c4(self,q):
-		if q!=" ":
+		if q in self.otros_signos:
+			return "c4"
+		else:
 			return "m"

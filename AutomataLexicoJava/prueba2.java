@@ -1,1 +1,1 @@
-int octall=-0123;
+int octall= -0123;
