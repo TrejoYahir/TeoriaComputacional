@@ -2,7 +2,7 @@ from automata import Automata
 def main():
 	archivo=open("prueba.java","r")
 	linea=1
-	estados_aceptacion=("c1","c2","c3","c4","c5")
+	estados_aceptacion=("c0","c1","c2","c3","c4")
 	imprimir_error=False
 	conteo_errores=0
 	for line in archivo.readlines():
@@ -11,10 +11,13 @@ def main():
 			for pal in palabras:
 				if ("0" in pal or "1" in pal or "2" in pal or "3" in pal or "4" in pal or "5" in pal or "6" in pal or "7" in pal or "8" in pal or "9" in pal):
 					auto=Automata()
+					pal=pal.replace("\n","")
 					for c in pal:
-						auto.calcular_estado(c)
+						#print(auto.estado)
+						#print(c)
+						auto.calcular_estado(c.lower())
 					if (auto.estado not in estados_aceptacion):
-						print(auto.estado)
+						#print(auto.estado)
 						imprimir_error=True
 						conteo_errores+=1
 		if imprimir_error:

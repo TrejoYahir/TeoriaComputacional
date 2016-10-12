@@ -1,1 +1,1 @@
-int octall= -0123;
+System.out.print("dato= "+(dato+ 0xAA));
