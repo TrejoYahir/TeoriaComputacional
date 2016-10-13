@@ -11,7 +11,7 @@ def main():
 			for pal in palabras:
 				if ("0" in pal or "1" in pal or "2" in pal or "3" in pal or "4" in pal or "5" in pal or "6" in pal or "7" in pal or "8" in pal or "9" in pal):
 					auto=Automata()
-					pal=pal.replace("\n","")
+					#pal=pal.replace("\n","")
 					for c in pal:
 						#print(auto.estado)
 						#print(c)

@@ -1,1 +1,1 @@
-System.out.print("dato= "+(dato+ 0xAA));
+float pi=3.1416, cteGrav=-6.674E-11;
