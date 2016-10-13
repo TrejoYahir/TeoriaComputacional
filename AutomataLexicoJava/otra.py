@@ -1,14 +1,15 @@
 from tkinter import *
 import time
 
-class alien(object):
+class diagrama(object):
      def __init__(self):
         self.root = Tk()
         self.root.title("Automata Lexico")
-        self.canvas = Canvas(self.root, width=400, height = 400)
+        self.canvas = Canvas(self.root, width=800, height = 600)
         self.canvas.pack()
-        self.alien2 = self.canvas.create_oval(2, 2, 40, 40, outline='black', fill='white')
+        self.q0 = self.canvas.create_oval(60, 100, 100, 200, outline='black', fill='white')
         self.text=self.canvas.create_text(20,20,text="q0")
+        self.alien1 = self.canvas.create_oval(60, 10, 100, 40, outline='black',fill='blue')
         self.canvas.pack()
         #self.root.after(0, self.animation)
         self.root.mainloop()
@@ -36,4 +37,4 @@ class alien(object):
                track = 0
             print (track)
 
-alien()
+diagrama()
