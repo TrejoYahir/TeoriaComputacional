@@ -7,6 +7,7 @@ class diagrama(object):
         self.root.title("Automata Lexico")
         self.canvas = Canvas(self.root, width=800, height = 600)
         self.canvas.pack()
+        #Ver que onda coordenadas
         self.q0 = self.canvas.create_oval(60, 100, 100, 200, outline='black', fill='white')
         self.text=self.canvas.create_text(20,20,text="q0")
         self.alien1 = self.canvas.create_oval(60, 10, 100, 40, outline='black',fill='blue')
