@@ -128,5 +128,3 @@ class Automata():
 			self.estado_aux.append("q3")
 		else:
 			self.estado_aux.append("m")
-
-
